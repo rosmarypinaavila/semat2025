@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static "css/home.css" %}" />
+    <title>SEMAT - Sistema Municipal</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Sidebar -->
+        {% include 'aside.html' %}
+        <!-- Header -->
+        {% include 'header.html' %}
+
+        <!-- Content Area -->
+        <main class="content">
+          <div class="notification-box">
+            <h3 class="notification-title">
+              <i class="fas fa-exclamation-circle"></i> Información importante
+            </h3>
+            <div class="notification-content">
+              <p>
+                Para completar la solicitud de su trámite, asegúrese de adjuntar
+                toda la documentación requerida según lo especificado en el
+                sistema.
+              </p>
+              <p>
+                Verifique que la información proporcionada sea completa y
+                coincida exactamente con los documentos presentados. Cualquier
+                discrepancia podría afectar el procesamiento de su solicitud.
+              </p>
+              <p>
+                Todos los documentos deben estar vigentes y en formato digital
+                legible.
+              </p>
+              <p>Mediante este mensaje queda notificado e informado.</p>
+            </div>
+          </div>
+
+          <h2 style="margin-bottom: 20px; color: var(--primary)">
+            Módulos Disponibles
+          </h2>
+
+          <div class="modules-grid">
+            <div class="module-card">
+              <div class="card-header">Mis Empresas</div>
+              <div class="card-body">
+                <div class="card-icon">
+                  <i class="fas fa-building"></i>
+                </div>
+                <p class="card-description">
+                  Gestiona toda la información relacionada con tus empresas
+                  registradas en el municipio.
+                </p>
+                <div class="card-actions">
+                  <button class="card-button">
+                    <i class="fas fa-eye"></i> Ver Detalles
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="module-card">
+              <div class="card-header">Mis Inmuebles</div>
+              <div class="card-body">
+                <div class="card-icon">
+                  <i class="fas fa-house-user"></i>
+                </div>
+                <p class="card-description">
+                  Consulta y gestiona los impuestos y datos de tus propiedades
+                  en el municipio.
+                </p>
+                <div class="card-actions">
+                  <button class="card-button">
+                    <i class="fas fa-eye"></i> Ver Detalles
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="module-card">
+              <div class="card-header">Mis Vehículos</div>
+              <div class="card-body">
+                <div class="card-icon">
+                  <i class="fas fa-car"></i>
+                </div>
+                <p class="card-description">
+                  Administra el pago de impuestos y licencias para tus vehículos
+                  registrados.
+                </p>
+                <div class="card-actions">
+                  <button class="card-button">
+                    <i class="fas fa-eye"></i> Ver Detalles
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <p><strong>SEMAT</strong> - Alcaldía de Tribarren - 2025</p>
+      </footer>
+    </div>
+
+    <script>
+      // Simular cambio de módulo al hacer clic en items del menú
+      document.querySelectorAll(".menu-item").forEach((item) => {
+        item.addEventListener("click", function () {
+          document
+            .querySelector(".menu-item.active")
+            .classList.remove("active");
+          this.classList.add("active");
+        });
+      });
+
+      // Animación para los botones de tarjetas
+      document.querySelectorAll(".card-button").forEach((button) => {
+        button.addEventListener("click", function () {
+          this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Cargando...';
+          setTimeout(() => {
+            this.innerHTML = '<i class="fas fa-check"></i> Completado';
+            this.style.background =
+              "linear-gradient(to right, var(--success), #2ecc71)";
+          }, 1500);
+        });
+      });
+    </script>
+  </body>
+</html>
