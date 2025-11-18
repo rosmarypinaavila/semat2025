@@ -111,7 +111,7 @@
           <div class="formbg-outer">
             <div class="formbg">
               <div class="formbg-inner padding-horizontal--48">
-                <form id="stripe-login">
+                <form id="stripe-login" method="post">
                   {% csrf_token %}
                   <div class="field padding-bottom--24">
                     <label for="email">Usuario</label>
@@ -131,8 +131,8 @@
                   </div>
                 </form>
                 <div class="reset-pass">
-                        <a href="#">¿Olvidaste tu contraseña?</a>
-                      </div>
+                  <a href="#">¿Olvidaste tu contraseña?</a>
+                </div>
               </div>
             </div>
             <div class="footer-link padding-top--24">
