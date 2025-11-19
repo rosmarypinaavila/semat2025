@@ -12,15 +12,16 @@
     />
   </head>
   <body>
+    <!-- Sidebar -->
+
+    <!-- Header -->
     <div class="app-container">
       <!-- Main Content -->
-      <div class="main-content">
-        <!-- Sidebar -->
-        {% include 'aside.html' %}
-        <!-- Header -->
-        {% include 'header.html' %}
+      {% include 'header.html' %}
 
+      <div class="main-content">
         <!-- Content Area -->
+        {% include 'aside.html' %}
         <main class="content">
           <div class="notification-box">
             <h3 class="notification-title">
@@ -44,10 +45,6 @@
               <p>Mediante este mensaje queda notificado e informado.</p>
             </div>
           </div>
-
-          <h2 style="margin-bottom: 20px; color: var(--primary)">
-            Módulos Disponibles
-          </h2>
 
           <div class="modules-grid">
             <div class="module-card">

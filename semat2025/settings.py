@@ -62,7 +62,7 @@ ROOT_URLCONF = 'semat2025.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ BASE_DIR, 'C:/Respaldo rosmary/Desktop/semat2025/templates'],
+        'DIRS': [ BASE_DIR, 'C:/Users/SEMAT/Desktop/semat2025/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
