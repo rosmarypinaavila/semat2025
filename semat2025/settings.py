@@ -83,8 +83,12 @@ WSGI_APPLICATION = 'semat2025.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'semat2025.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'Tramites',
+        'USER': 'postgres',
+        'PASSWORD':'123456',
+        'HOST':'localhost',
+        'PORT': '5432',
     }
 }
 
