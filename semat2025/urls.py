@@ -22,5 +22,10 @@ urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('', include('personal.urls')),
     path('', include('act_econ.urls')),
+    path('', include('inmueble_urb.urls')),
+    path('', include('publicidad.urls')),
+    path('', include('tramites.urls')),
+    path('', include('vehiculo.urls')),
+    
 
 ]
