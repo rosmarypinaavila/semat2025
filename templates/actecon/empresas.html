@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static "css/home.css" %}" />
+    <title>SEMAT - Sistema Municipal</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Sidebar -->
+
+    <!-- Header -->
+    <div class="app-container">
+      <!-- Main Content -->
+      {% include 'header.html' %}
+
+      <div class="main-content">
+        <!-- Content Area -->
+        {% include 'aside.html' %}
+        <main class="content"></main>
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <p><strong>SEMAT</strong> - Alcaldía de Tribarren - 2025</p>
+      </footer>
+    </div>
+
+    <script>
+      // Simular cambio de módulo al hacer clic en items del menú
+      document.querySelectorAll(".menu-item").forEach((item) => {
+        item.addEventListener("click", function () {
+          document
+            .querySelector(".menu-item.active")
+            .classList.remove("active");
+          this.classList.add("active");
+        });
+      });
+
+      // Animación para los botones de tarjetas
+      document.querySelectorAll(".card-button").forEach((button) => {
+        button.addEventListener("click", function () {
+          this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Cargando...';
+          setTimeout(() => {
+            this.innerHTML = '<i class="fas fa-check"></i> Completado';
+            this.style.background =
+              "linear-gradient(to right, var(--success), #2ecc71)";
+          }, 1500);
+        });
+      });
+    </script>
+  </body>
+</html>
