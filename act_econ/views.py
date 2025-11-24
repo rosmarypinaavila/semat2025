@@ -4,4 +4,4 @@ from django.shortcuts import render
 
 
 def empresas(request):
-    return render(request, 'act_econ/empresas.html')
+    return render(request, 'actecon/empresas.html')

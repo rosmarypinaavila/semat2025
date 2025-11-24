@@ -3,6 +3,6 @@ from  .views import *
 from act_econ import views
 
 urlpatterns = [
-    path('/empresas/', empresas),
+    path('empresas/', empresas),
     
 ] 
