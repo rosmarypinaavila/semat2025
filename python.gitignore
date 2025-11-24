@@ -1,6 +1,4 @@
 # Django
 __pycache__\
-*.pyc
-*.pyc
-*.pyo
-*.pyd
+*.py[codz]
+*$py.class
