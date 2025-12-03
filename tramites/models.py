@@ -1,17 +1,44 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 from django.contrib.auth.models import User
 
 # Create your models here.
 
 
 class Contribuyente(models.Model):
+    TIPO_CONTRIBUYENTE = [
+        ('natural', 'Persona Natural'),
+        ('juridica', 'Persona Jurídica'),
+        ('fpersonal', 'Firma Personal'),
+        ('EGubernamental', 'Organismo o ente Gubernamental'),
+        ('emprendedor', 'Emprendedor'),
+
+    ]
+    ced_rif = models.CharField(max_length=13, unique=True)
+    tipo_contribuyente = models.CharField(max_length=15, choices=TIPO_CONTRIBUYENTE, default='natural')
     telefono = models.CharField(max_length=20, blank=True, null=True)
     direccion = models.TextField(blank=True, null=True)
     identificacion = models.CharField(max_length=50, unique=True)
     fecha_registro = models.DateTimeField(auto_now_add=True)
     status = models.BooleanField(default=False)
-    users = models.OneToOneField(User, on_delete=models.CASCADE)
+    users = models.OneToOneField(User, on_delete=models.CASCADE, related_name='perfil_contribuyente')
+
+    def __str__(self):
+        return f"{self.users.username} - {self.ced_rif}"
+
+# Signal para crear perfil automáticamente
+@receiver(post_save, sender=User)
+def crear_perfil_contribuyente(sender, instance, created, **kwargs):
+    if created and not instance.is_staff:  # Solo para usuarios no administradores
+        Contribuyente.objects.create(users=instance)
+
+@receiver(post_save, sender=User)
+def guardar_perfil_contribuyente(sender, instance, **kwargs):
+    if hasattr(instance, 'perfil_contribuyente'):
+        instance.perfil_contribuyente.save()
 
 
     

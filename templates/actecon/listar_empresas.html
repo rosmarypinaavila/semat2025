@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empresas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <!-- Mensajes -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Empresas Registradas</h1>
+            <span class="badge bg-primary fs-6">Contribuyente: {{ contribuyente.razon_social }}</span>
+        </div>
+
+        <!-- Botón para mostrar/ocultar formulario -->
+        <div class="mb-4">
+            <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#formularioEmpresa">
+                + Registrar Nueva Empresa
+            </button>
+        </div>
+
+        <!-- Formulario Colapsable -->
+        <div class="collapse mb-4" id="formularioEmpresa">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Registrar Nueva Empresa</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ form.razon_social.id_for_label }}" class="form-label">Nombre de la Empresa</label>
+                                {{ form.razon_social }}
+                                {% if form.razon_social.errors %}
+                                    <div class="text-danger">{{ form.razon_social.errors }}</div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ form.licencia.id_for_label }}" class="form-label">Licencia</label>
+                                {{ form.licencia }}
+                                {% if form.licencia.errors %}
+                                    <div class="text-danger">{{ form.licencia.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.direccion.id_for_label }}" class="form-label">Dirección</label>
+                            {{ form.direccion }}
+                            {% if form.direccion.errors %}
+                                <div class="text-danger">{{ form.direccion.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ form.telefono.id_for_label }}" class="form-label">Teléfono</label>
+                                {{ form.telefono }}
+                                {% if form.telefono.errors %}
+                                    <div class="text-danger">{{ form.telefono.errors }}</div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ form.observacion.id_for_label }}" class="form-label">Observacion</label>
+                                {{ form.observacion }}
+                                {% if form.observacion.errors %}
+                                    <div class="text-danger">{{ form.observacion.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary">Registrar Empresa</button>
+                            <button type="button" class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#formularioEmpresa">
+                                Cancelar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Listado de Empresas -->
+        {% if empresas %}
+            <div class="row">
+                {% for empresa in empresas %}
+                    <div class="col-md-6 col-lg-4 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ empresa.razonsocial }}</h5>
+                                <p class="card-text">
+                                    <strong>Licencia:</strong> {{ empresa.licencia }}<br>
+                                    <strong>Teléfono:</strong> {{ empresa.direccion }}<br>
+                                    <strong>Dirección:</strong> {{ empresa.direccion|truncatewords:10 }}
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">
+                                    Registrada el: {{ empresa.fecha_creacion|date:"d/m/Y" }}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-info text-center">
+                <h4>No tienes empresas registradas</h4>
+                <p class="mb-0">Haz clic en "Registrar Nueva Empresa" para agregar tu primera empresa.</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Script para mantener el formulario abierto si hay errores -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar si hay errores en el formulario
+            const formErrors = document.querySelector('.text-danger');
+            if (formErrors) {
+                const formulario = document.getElementById('formularioEmpresa');
+                const bsCollapse = new bootstrap.Collapse(formulario, {
+                    toggle: true
+                });
+            }
+        });
+    </script>
+</body>
+</html>
